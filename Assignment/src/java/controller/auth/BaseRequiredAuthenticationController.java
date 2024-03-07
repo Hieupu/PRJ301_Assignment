@@ -4,7 +4,7 @@
  */
 package controller.auth;
 
-import dal.LoginDBContext;
+import dal.StudentLoginDBContext;
 import entity.Account;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -42,7 +42,7 @@ public abstract class BaseRequiredAuthenticationController extends HttpServlet {
 
                 if (username != null && password != null) {
                     try {
-                        LoginDBContext db = new LoginDBContext();
+                        StudentLoginDBContext db = new StudentLoginDBContext();
                         return db.checkLogin(username, password);
                     } catch (Exception ex) {
                         Logger.getLogger(BaseRequiredAuthenticationController.class.getName()).log(Level.SEVERE, null, ex);
