@@ -20,6 +20,7 @@
                 border: 1px solid black;
                 padding: 8px;
                 text-align: center;
+                text-decoration: none;
             }
             th {
                 background-color: lightblue;
@@ -44,14 +45,14 @@
                             <td>
                                 <%-- Lặp qua danh sách phiên để tìm các phiên có sl.day và sl.value tương ứng --%>
                                 <%-- Sau đó tổng hợp thông tin của các phiên và hiển thị trong ô --%>
-                                <c:forEach var="session" items="${session}">
-                                    <c:if test="${session.slot.value == hour && session.slot.day == day}">
-                                        <a href="take?subject=${session.subject.name}&value=${session.slot.value}&day=${session.slot.day}">
-                                            ${session.subject.name}</a>
-                                        ${session.slot.duration}<br>
-                                        Lecture: ${session.lecture.name}<br>
-                                        Group: ${session.group.name}<br>
-                                        Room: ${session.room.code}
+                                <c:forEach var="sess" items="${sessions}">
+                                    <c:if test="${sess.slot.value == hour && sess.slot.day == day}">
+                                        <a href="take?subject=${sess.subject.name}&value=${sess.slot.value}&day=${sess.slot.day}">
+                                            ${sess.subject.name}</a>
+                                        ${sess.slot.duration}<br>
+                                        Lecture: ${sess.lecture.name}<br>
+                                        Group: ${sess.group.name}<br>
+                                        Room: ${sess.room.code}
                                     </c:if>
                                 </c:forEach>
                             </td>

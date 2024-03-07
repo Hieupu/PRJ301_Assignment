@@ -13,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     
-        <a href="/Assignment/taketimetable">Take Attend</a></br>
+    <a href="/Assignment/taketimetable?id=${param.id}">Take Attend</a></br>
         <a href="/Assignment/viewtimetable">View Attend</a>
     
 </html>
