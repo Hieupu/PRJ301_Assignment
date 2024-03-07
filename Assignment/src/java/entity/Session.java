@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package entity;
+
+import java.sql.Date;
+
 /**
  *
  * @author Admin
@@ -14,7 +17,8 @@ public class Session {
     private Group group;
     private Room room;
     private Subject subject;
-
+    private Date date;
+    
     public String getId() {
         return id;
     }
@@ -62,6 +66,13 @@ public class Session {
     public void setSubject(Subject subject) {
         this.subject = subject;
     }
-    
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
     
 }

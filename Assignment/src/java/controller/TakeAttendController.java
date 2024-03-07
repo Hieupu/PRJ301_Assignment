@@ -5,13 +5,13 @@ import entity.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import controller.auth.BaseRequiredAuthenticationController;
 import entity.Account;
+
 
 
 public class TakeAttendController extends BaseRequiredAuthenticationController {
@@ -46,7 +46,7 @@ public class TakeAttendController extends BaseRequiredAuthenticationController {
             request.setAttribute("slotValue", slotValue);
             request.setAttribute("slotDay", slotDay);
 
-            request.getRequestDispatcher("./fap/takeattend.jsp").forward(request, response);
+            request.getRequestDispatcher("./fap/lecture/takeattend.jsp").forward(request, response);
         } catch (ServletException | IOException | NumberFormatException | SQLException ex) {
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();

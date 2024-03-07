@@ -8,43 +8,22 @@ import dal.SessionDBContext;
 import entity.Session;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import controller.auth.BaseRequiredAuthenticationController;
 import entity.Account;
+import java.io.PrintWriter;
+import java.util.Date;
+import util.DateTimeHelper;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "TimetableShow", urlPatterns = {"/showtime"})
-public class TimetableTakeController extends BaseRequiredAuthenticationController {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-        try {
-            SessionDBContext ses = new SessionDBContext();
-            ArrayList<Session> session = ses.list();
-            request.setAttribute("session", session);
-            request.getRequestDispatcher("./fap/timetable_take.jsp").forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(TimetableViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+public class TimetableTakeController extends BaseRequiredAuthenticationController {
 
     /**
      * Returns a short description of the servlet.
@@ -59,12 +38,54 @@ public class TimetableTakeController extends BaseRequiredAuthenticationControlle
     
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
-        processRequest(req, resp);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
-        processRequest(req, resp);
+        try {
+            String lid = req.getParameter("id");
+            String raw_from = req.getParameter("from");
+            String raw_to = req.getParameter("to");
+            Date today = new Date();
+            java.sql.Date from = null;
+            java.sql.Date to = null;
+            
+            if(raw_from ==null)
+            {
+                from = DateTimeHelper.convertUtilDateToSqlDate(DateTimeHelper.getWeekStart(today));
+            }
+            else
+            {
+                from = java.sql.Date.valueOf(raw_from);
+            }
+            
+            if(raw_to == null)
+            {
+                to = DateTimeHelper.convertUtilDateToSqlDate(DateTimeHelper.
+                        addDaysToDate(DateTimeHelper.getWeekStart(today),6));
+            }
+            else
+            {
+                to = java.sql.Date.valueOf(raw_to);
+            }
+            
+            ArrayList<java.sql.Date> dates = DateTimeHelper.getDatesBetween(from, to);
+            
+            SessionDBContext se = new SessionDBContext();
+            ArrayList<Session> sessions = se.list(lid, from, to);
+            
+            req.setAttribute("from", from);
+            req.setAttribute("to", to);
+            req.setAttribute("dates", dates);
+            req.setAttribute("sessions", sessions);
+            req.getRequestDispatcher("./fap/lecture/timetable_take.jsp").forward(req, resp);
+        } catch (NumberFormatException | SQLException ex) {
+            resp.setContentType("text/html");
+            PrintWriter out = resp.getWriter();
+            out.println("<h2>Xảy ra lỗi khi xử lý yêu cầu:</h2>");
+            out.println("<p>" + ex.getMessage() + "</p>");
+            ex.printStackTrace(out);
+        }
     }
 
 }

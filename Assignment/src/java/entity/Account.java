@@ -11,7 +11,7 @@ package entity;
 public class Account {
     private String user;
     private String pass;
-    private String role;
+    private String id;
 
     public String getUser() {
         return user;
@@ -29,12 +29,13 @@ public class Account {
         this.pass = pass;
     }
 
-    public String getRole() {
-        return role;
+    public String getId() {
+        return id;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setId(String id) {
+        this.id = id;
     }
+    
     
 }

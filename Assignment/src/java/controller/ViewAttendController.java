@@ -5,14 +5,12 @@ import entity.Student;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import controller.auth.BaseRequiredAuthenticationController;
 import entity.Account;
-
 
 public class ViewAttendController extends BaseRequiredAuthenticationController {
 
@@ -31,10 +29,10 @@ public class ViewAttendController extends BaseRequiredAuthenticationController {
 
             StudentDBContext stuDB = new StudentDBContext();
             ArrayList<Student> students = stuDB.show(subjectName, slotValue, slotDay);
-            
+
             request.setAttribute("students", students);
             request.setAttribute("subjectName", subjectName);
-            request.getRequestDispatcher("./fap/viewattend.jsp").forward(request, response);
+            request.getRequestDispatcher("./fap/lecture/viewattend.jsp").forward(request, response);
         } catch (ServletException | IOException | NumberFormatException | SQLException ex) {
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();

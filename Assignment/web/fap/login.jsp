@@ -13,9 +13,9 @@
     </head>
     <body>
         <form action="login" method="POST">
-            <label for="userID"> Username: </label> 
+            <label for="userID"> Username </label> 
             <input type="text" id="userID" name="username"><br>
-            <label for="pass"> Password:  </label>
+            <label for="pass"> Password </label>
             <input type="password" id="pass" name="password"> <br>
             <input type ="submit" value ="Login" name ="submit"> <br>
         </form>

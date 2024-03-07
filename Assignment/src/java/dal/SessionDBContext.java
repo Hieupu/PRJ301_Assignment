@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.sql.Date;
 
 /**
  *
@@ -21,18 +22,22 @@ import java.util.ArrayList;
  */
 public class SessionDBContext extends DBContext<Session> {
 
-    public ArrayList<Session> list() throws SQLException {
+    public ArrayList<Session> list(String lid, Date from, Date to) throws SQLException {
         ArrayList<Session> ses = new ArrayList<>();
         PreparedStatement stm = null;
-        String sql = "SELECT su.name AS subject_name, sl.value, sl.duration, sl.day, l.name AS lecture_name, g.name AS group_name, r.code "
+        String sql = "SELECT se.date, su.name AS subject_name, sl.value, sl.duration, sl.day, l.name AS lecture_name, g.name AS group_name, r.code "
                 + "FROM [Group] g "
                 + "JOIN [Session] se ON se.gid = g.id "
                 + "JOIN Slot sl ON sl.id = se.slid "
                 + "JOIN Subject su ON su.id = g.suid "
                 + "JOIN Lecture l ON l.id = se.lid "
-                + "JOIN Room r ON r.id = se.rid";
+                + "JOIN Room r ON r.id = se.rid "
+                + "WHERE se.lid=? AND se.[date] >=? AND se.[date]<=?";
         try {
             stm = connection.prepareStatement(sql);
+            stm.setString(1, lid);
+            stm.setDate(2, from);
+            stm.setDate(3, to);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Slot sl = new Slot();
@@ -52,14 +57,14 @@ public class SessionDBContext extends DBContext<Session> {
                 Room r = new Room();
                 r.setCode(rs.getString("code"));
 
-                // Create a Session object and add it to the list
                 Session session = new Session();
                 session.setSlot(sl);
                 session.setSubject(su);
                 session.setLecture(l);
                 session.setGroup(g);
                 session.setRoom(r);
-
+                java.sql.Date datefromDB = rs.getDate("date");
+                session.setDate(datefromDB);
                 ses.add(session);
             }
         } finally {
