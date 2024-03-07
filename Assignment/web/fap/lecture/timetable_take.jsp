@@ -26,7 +26,7 @@
             <thead>
                 <tr>
                     <th><form action="taketimetable" method="GET">
-                            Lecture: <input type="text" name="id" /><br>
+                            Lecture: <input type="text" name="id" value="${param.id}"/><br>
                             From: <input type="date" name="from" value="${requestScope.from}" />
                             To: <input type="date" name="to" value="${requestScope.to}" />
                             <input type="submit" value="View" />
