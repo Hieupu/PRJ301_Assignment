@@ -48,7 +48,6 @@
                                             ${sess.subject.name}
                                         </a>
                                         (${sess.slot.duration})<br>
-                                        ${sess.lecture.name}<br>
                                         ${sess.group.name}<br>
                                         ${sess.room.code}
                                     </c:if>
