@@ -1,6 +1,6 @@
 <%-- 
     Document   : success
-    Created on : Feb 29, 2024, 2:13:13 PM
+    Created on : Mar 8, 2024, 1:34:27 AM
     Author     : Admin
 --%>
 
@@ -27,7 +27,6 @@
         </style>
     </head>
     
-    <a href="/Assignment/lecture/taketimetable?id=${param.id}">Take Attend</a><br>
-    <a href="/Assignment/lecture/viewtimetable?id=${param.id}">View Attend</a><br>
+    <a href="/Assignment/student/view?id=${param.id}">View Attend</a><br>
     <a href="/Assignment/logout">Log Out</a>
 </html>

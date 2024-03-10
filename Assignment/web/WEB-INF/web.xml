@@ -9,24 +9,36 @@
         <servlet-class>controller.auth.LogoutController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>TakeAttendController</servlet-name>
-        <servlet-class>controller.TakeAttendController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ViewAttendController</servlet-name>
-        <servlet-class>controller.ViewAttendController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>TakeTimetable</servlet-name>
-        <servlet-class>controller.TimetableTakeController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ViewTimeTable</servlet-name>
-        <servlet-class>controller.TimetableViewController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>controller.auth.LoginController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StudentTimetableViewController</servlet-name>
+        <servlet-class>controller.student.TimetableViewController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StudentViewClassList</servlet-name>
+        <servlet-class>controller.student.ViewClassList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LectureTimetableView</servlet-name>
+        <servlet-class>controller.lecture.TimetableViewController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LectureTakeTimetable</servlet-name>
+        <servlet-class>controller.lecture.TimetableTakeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LectureTakeAttend</servlet-name>
+        <servlet-class>controller.lecture.TakeAttendController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LectureViewAttend</servlet-name>
+        <servlet-class>controller.lecture.ViewAttendController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TakeAttend</servlet-name>
+        <servlet-class>controller.lecture.AttendanceController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BaseRequiredAuthenticationController</servlet-name>
@@ -37,24 +49,36 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>TakeAttendController</servlet-name>
-        <url-pattern>/take</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewAttendController</servlet-name>
-        <url-pattern>/view</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>TakeTimetable</servlet-name>
-        <url-pattern>/taketimetable</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewTimeTable</servlet-name>
-        <url-pattern>/viewtimetable</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StudentTimetableViewController</servlet-name>
+        <url-pattern>/student/view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StudentViewClassList</servlet-name>
+        <url-pattern>/student/classview</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LectureTimetableView</servlet-name>
+        <url-pattern>/lecture/viewtimetable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LectureTakeTimetable</servlet-name>
+        <url-pattern>/lecture/taketimetable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LectureTakeAttend</servlet-name>
+        <url-pattern>/lecture/take</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LectureViewAttend</servlet-name>
+        <url-pattern>/lecture/view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TakeAttend</servlet-name>
+        <url-pattern>/attend</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>fap/login.jsp</welcome-file>

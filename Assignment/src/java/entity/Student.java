@@ -4,7 +4,6 @@
  */
 package entity;
 
-import java.util.ArrayList;
 
 /**
  *
@@ -14,16 +13,21 @@ public class Student {
     private String id;
     private String name;
     private boolean attent;
+    private String des;
 
     public Student(String id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Student(String id, String name, boolean attent) {
+    public Student(String id, String name, boolean attent, String des) {
         this.id = id;
         this.name = name;
         this.attent = attent;
+        this.des = des;
+    }
+
+    public Student() {
     }
 
     public String getId() {
@@ -48,6 +52,14 @@ public class Student {
 
     public void setAttent(boolean attent) {
         this.attent = attent;
+    }
+
+    public String getDes() {
+        return des;
+    }
+
+    public void setDes(String des) {
+        this.des = des;
     }
     
 }

@@ -2,9 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.student;
 
+import controller.auth.BaseRequiredAuthenticationController;
 import dal.SessionDBContext;
+import entity.Account;
 import entity.Session;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -12,11 +14,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import controller.auth.BaseRequiredAuthenticationController;
-import entity.Account;
-import java.io.PrintWriter;
 import java.util.Date;
 import util.DateTimeHelper;
 
@@ -24,13 +21,22 @@ import util.DateTimeHelper;
  *
  * @author Admin
  */
-public class TimetableViewController extends BaseRequiredAuthenticationController {
+public class TimetableViewController extends BaseRequiredAuthenticationController{
 
     /**
-     * Returns a short description of the servlet.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
-     * @return a String containing servlet description
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
      */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+    }
+
     @Override
     public String getServletInfo() {
         return "Short description";
@@ -43,12 +49,12 @@ public class TimetableViewController extends BaseRequiredAuthenticationControlle
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
         try {
-            String lid = req.getParameter("id");
+            String sid = req.getParameter("id");
             String raw_from = req.getParameter("from");
             String raw_to = req.getParameter("to");
             Date today = new Date();
-            java.sql.Date from = null;
-            java.sql.Date to = null;
+            java.sql.Date from;
+            java.sql.Date to;
 
             if (raw_from == null) {
                 from = DateTimeHelper.convertUtilDateToSqlDate(DateTimeHelper.getWeekStart(today));
@@ -66,21 +72,15 @@ public class TimetableViewController extends BaseRequiredAuthenticationControlle
             ArrayList<java.sql.Date> dates = DateTimeHelper.getDatesBetween(from, to);
 
             SessionDBContext se = new SessionDBContext();
-            ArrayList<Session> sessions = se.list(lid, from, to);
+            ArrayList<Session> sessions = se.stulist(sid, from, to);
 
             req.setAttribute("from", from);
             req.setAttribute("to", to);
             req.setAttribute("dates", dates);
             req.setAttribute("sessions", sessions);
-            req.getRequestDispatcher("./fap/lecture/timetable_view.jsp").forward(req, resp); // Sử dụng forward thay vì chỉ sử dụng getRequestDispatcher
+            req.getRequestDispatcher("../fap/student/timetable_view.jsp").forward(req, resp);
 
-        } catch (Exception ex) {
-            Logger.getLogger(TimetableViewController.class.getName()).log(Level.SEVERE, null, ex);
-            resp.setContentType("text/html");
-            PrintWriter out = resp.getWriter();
-            out.println("<h2>Xảy ra lỗi khi xử lý yêu cầu:</h2>");
-            out.println("<p>" + ex.getMessage() + "</p>");
-            ex.printStackTrace(out);
+        } catch(ServletException | IOException | SQLException e){
         }
     }
 

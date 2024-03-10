@@ -14,7 +14,7 @@ import java.sql.*;
 public class LectureLoginDBContext extends DBContext<Lecture>{
     PreparedStatement stm = null;
     ResultSet rs = null;
-   LectureAccount acc = new LectureAccount();
+    LectureAccount acc = new LectureAccount();
 
     public LectureAccount checkLogin(String user, String password) throws Exception {
         String sql1 = "SELECT [user], pass, lid FROM LectureAccount WHERE [user] = ? AND [pass] = ?";

@@ -19,13 +19,16 @@
             th {
                 background-color: lightblue;
             }
+            a { 
+                color: blue;
+            }
         </style>
     </head>
     <body>
         <table>
             <thead>
                 <tr>
-                    <th><form action="taketimetable" method="GET">
+                    <th><form action="lecture/taketimetable" method="GET">
                             Lecture: <input type="text" name="id" value="${param.id}"/><br>
                             From: <input type="date" name="from" value="${requestScope.from}" />
                             To: <input type="date" name="to" value="${requestScope.to}" />
@@ -39,7 +42,7 @@
             <tbody>
                 <c:forEach var="hour" begin="1" end="6">
                     <tr>
-                        <td>Tiết ${hour}</td>
+                        <td>Slot ${hour}</td>
                         <c:forEach var="date" items="${dates}">
                             <td>
                                 <c:forEach var="sess" items="${sessions}">
@@ -47,7 +50,7 @@
                                         <a href="take?subject=${sess.subject.name}&value=${sess.slot.value}&day=${sess.slot.day}">
                                             ${sess.subject.name}
                                         </a>
-                                        (${sess.slot.duration})<br>
+                                        ${sess.slot.duration}<br>
                                         ${sess.group.name}<br>
                                         ${sess.room.code}
                                     </c:if>

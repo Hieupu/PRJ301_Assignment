@@ -1,4 +1,4 @@
-package controller;
+package controller.lecture;
 
 import dal.StudentDBContext;
 import entity.Student;
@@ -12,41 +12,27 @@ import java.util.ArrayList;
 import controller.auth.BaseRequiredAuthenticationController;
 import entity.Account;
 
+public class ViewAttendController extends BaseRequiredAuthenticationController {
 
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }
 
-public class TakeAttendController extends BaseRequiredAuthenticationController {
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            // Kiểm tra xem request có chứa các tham số cần thiết không
             String subjectName = request.getParameter("subject");
-            String valueParam = request.getParameter("value");
-            String dayParam = request.getParameter("day");
-
-            // Nếu một trong các tham số cần thiết bị thiếu, hiển thị thông báo lỗi
-            if (subjectName == null || valueParam == null || dayParam == null) {
-                response.setContentType("text/html");
-                PrintWriter out = response.getWriter();
-                out.println("<h2>Xảy ra lỗi khi xử lý yêu cầu:</h2>");
-                out.println("<p>Thiếu tham số cần thiết từ form.</p>");
-                return;
-            }
-
-            // Chuyển đổi giá trị value và day sang số nguyên
-            int slotValue = Integer.parseInt(valueParam);
-            int slotDay = Integer.parseInt(dayParam);
+            int slotValue = Integer.parseInt(request.getParameter("value"));
+            int slotDay = Integer.parseInt(request.getParameter("day"));
 
             StudentDBContext stuDB = new StudentDBContext();
-            ArrayList<Student> students = stuDB.list(subjectName, slotValue, slotDay);
+            ArrayList<Student> students = stuDB.show(subjectName, slotValue, slotDay);
 
             request.setAttribute("students", students);
             request.setAttribute("subjectName", subjectName);
-            request.setAttribute("slotValue", slotValue);
-            request.setAttribute("slotDay", slotDay);
-
-            request.getRequestDispatcher("./fap/lecture/takeattend.jsp").forward(request, response);
+            request.getRequestDispatcher("../fap/lecture/viewattend.jsp").forward(request, response);
         } catch (ServletException | IOException | NumberFormatException | SQLException ex) {
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();

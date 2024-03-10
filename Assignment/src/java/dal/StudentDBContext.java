@@ -42,13 +42,14 @@ public class StudentDBContext extends DBContext<Student> {
     public ArrayList<Student> show(String subjectName, int slotValue, int slotDay) throws SQLException {
         ArrayList<Student> students = new ArrayList<>();
         PreparedStatement stm = null;
-        String sql = "SELECT s.id,s.name,a.isattend FROM Student s\n"
-                + "JOIN Attendance a ON a.sid = s.id\n"
-                + "JOIN [Session] se ON se.id = a.seid\n"
-                + "JOIN [Group] g ON g.id = se.gid\n"
-                + "JOIN Slot sl ON sl.id = se.slid\n"
-                + "JOIN Subject su ON su.id = g.suid\n"
-                + "WHERE su.name = ? AND sl.value = ? AND sl.day = ?";
+        String sql = """
+                     SELECT s.id,s.name,a.isattend,a.des FROM Student s
+                     JOIN Attendance a ON a.sid = s.id
+                     JOIN [Session] se ON se.id = a.seid
+                     JOIN [Group] g ON g.id = se.gid
+                     JOIN Slot sl ON sl.id = se.slid
+                     JOIN Subject su ON su.id = g.suid
+                     WHERE su.name = ? AND sl.value = ? AND sl.day = ?""";
         stm = connection.prepareStatement(sql);
         stm.setString(1, subjectName);
         stm.setInt(2, slotValue);
@@ -58,7 +59,8 @@ public class StudentDBContext extends DBContext<Student> {
             String id = rs.getString("id");
             String name = rs.getString("name");
             Boolean isattend = rs.getBoolean("isattend");
-            Student student = new Student(id, name, isattend);
+            String des = rs.getString("des");
+            Student student = new Student(id, name, isattend, des);
             students.add(student);
         }
         return students;

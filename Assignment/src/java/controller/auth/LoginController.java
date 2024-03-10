@@ -7,7 +7,6 @@ package controller.auth;
 import dal.LectureLoginDBContext;
 import dal.StudentLoginDBContext;
 import entity.Account;
-import entity.LectureAccount;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
@@ -72,7 +71,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
             session.setAttribute("role", role); 
             
             if ("student".equals(role)) {
-                response.sendRedirect("./fap/student_home.jsp");
+                response.sendRedirect("./fap/student/success.jsp?id=" + account.getId());
             } else if ("lecture".equals(role)) {
                  response.sendRedirect("./fap/lecture/success.jsp?id=" + account.getId());
             }

@@ -12,7 +12,7 @@
         <title>Login</title>
     </head>
     <body>
-        <form action="login" method="POST">
+        <form action="/Assignment/login" method="POST">
             <label for="userID"> Username </label> 
             <input type="text" id="userID" name="username"><br>
             <label for="pass"> Password </label>

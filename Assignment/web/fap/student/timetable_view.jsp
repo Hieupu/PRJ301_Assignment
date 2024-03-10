@@ -1,6 +1,6 @@
 <%-- 
-    Document   : timetable
-    Created on : Feb 15, 2024, 6:05:57 PM
+    Document   : timetable_view
+    Created on : Mar 8, 2024, 1:34:58 AM
     Author     : Admin
 --%>
 
@@ -25,7 +25,7 @@
             th {
                 background-color: lightblue;
             }
-            a { 
+            a {
                 color: blue;
             }
         </style>
@@ -34,8 +34,8 @@
         <table>
             <thead>
                 <tr>
-                    <th><form action="lecture/viewtimetable" method="GET">
-                            Lecture: <input type="text" name="id" value="${param.id}"/><br>
+                    <th><form action="view" method="GET">
+                            <input type="text" name="id" value="${param.id}"/><br>
                             From: <input type="date" name="from" value="${requestScope.from}" />
                             To: <input type="date" name="to" value="${requestScope.to}" />
                             <input type="submit" value="View" />
@@ -56,9 +56,20 @@
                                         <a href="view?subject=${sess.subject.name}&value=${sess.slot.value}&day=${sess.slot.day}">
                                             ${sess.subject.name}
                                         </a>
-                                        (${sess.slot.duration})<br>
+                                        ${sess.slot.duration}<br>
+                                        ${sess.lecture.name}<br>
                                         ${sess.group.name}<br>
-                                        ${sess.room.code}
+                                        ${sess.room.code}<br> 
+                                        <c:if test="${sess.stu.attent eq 'true'}">
+                                            Present
+                                        </c:if>
+                                        <c:if test="${sess.stu.attent eq 'false'}">
+                                            Absent
+                                        </c:if>
+                                        <c:if test="${not (sess.stu.attent eq 'true' or sess.stu.attent eq 'false')}">
+                                            Not yet
+                                        </c:if>
+
                                     </c:if>
                                 </c:forEach>
                             </td>
@@ -69,4 +80,3 @@
         </table>
     </body>
 </html>
-

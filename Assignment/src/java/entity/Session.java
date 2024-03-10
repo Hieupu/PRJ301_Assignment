@@ -18,6 +18,7 @@ public class Session {
     private Room room;
     private Subject subject;
     private Date date;
+    private Student stu;
     
     public String getId() {
         return id;
@@ -73,6 +74,14 @@ public class Session {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Student getStu() {
+        return stu;
+    }
+
+    public void setStu(Student stu) {
+        this.stu = stu;
     }
     
 }

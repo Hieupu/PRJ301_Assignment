@@ -33,7 +33,6 @@
     <body>
         <%String subjectName = (String)request.getAttribute("subjectName");%>
         <h2>${subjectName}</h2>
-        <form action="attendanceController" method="post">
             <table>
                 <thead>
                     <tr>
@@ -63,6 +62,5 @@
                     </c:forEach>
                 </tbody>
             </table>
-        </form>
     </body>
 </html>
