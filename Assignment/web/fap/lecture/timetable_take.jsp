@@ -19,7 +19,10 @@
             th {
                 background-color: lightblue;
             }
-            a { 
+            a {
+                color: blue;
+            }
+            edit {
                 color: blue;
             }
         </style>
@@ -28,7 +31,7 @@
         <table>
             <thead>
                 <tr>
-                    <th><form action="lecture/taketimetable" method="GET">
+                    <th><form action="taketimetable" method="GET">
                             Lecture: <input type="text" name="id" value="${param.id}"/><br>
                             From: <input type="date" name="from" value="${requestScope.from}" />
                             To: <input type="date" name="to" value="${requestScope.to}" />
@@ -47,12 +50,24 @@
                             <td>
                                 <c:forEach var="sess" items="${sessions}">
                                     <c:if test="${sess.slot.value eq hour and sess.date eq date}">
-                                        <a href="take?subject=${sess.subject.name}&value=${sess.slot.value}&day=${sess.slot.day}">
-                                            ${sess.subject.name}
-                                        </a>
-                                        ${sess.slot.duration}<br>
-                                        ${sess.group.name}<br>
-                                        ${sess.room.code}
+                                        ${sess.subject.name}
+                                        (${sess.slot.duration})<br>
+                                        ${sess.group.name}
+                                        <c:if test="${sess.taken eq 'false'}">
+                                            <div class="edit">
+                                                <h4 style="margin: 2px;">
+                                                    <a href="take?subject=${sess.subject.name}&value=${sess.slot.value}&day=${sess.slot.day}" style="color: blue;">Take</a>
+                                                </h4>
+
+                                            </div>
+                                        </c:if>
+                                        <c:if test="${sess.taken eq 'true'}">
+                                            <div class="edit" style="display: flex; justify-content: space-around;">
+                                                <h4 style="color: blue; margin: 2px"> Taken
+                                                    <a style="margin-left: 40px" href="take?subject=${sess.subject.name}&value=${sess.slot.value}&day=${sess.slot.day}"> Edit
+                                                    </a></h4>
+                                            </div>
+                                        </c:if>
                                     </c:if>
                                 </c:forEach>
                             </td>

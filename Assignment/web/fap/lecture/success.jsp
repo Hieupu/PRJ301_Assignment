@@ -24,10 +24,24 @@
                 margin: 10px; 
                 color: blue;
             }
+            .b {
+                padding: 5px;
+                margin: 5px;
+                background-color: lightcyan;
+            }
         </style>
     </head>
-    
-    <a href="/Assignment/lecture/taketimetable?id=${param.id}">Take Attend</a><br>
-    <a href="/Assignment/lecture/viewtimetable?id=${param.id}">View Attend</a><br>
-    <a href="/Assignment/logout">Log Out</a>
+    <body>
+    <form action="/Assignment/lecture/taketimetable?id=">
+        <input type="hidden" name="id" id="idValue" value="${param.id}">
+        <input class="b" type="submit" value="Take Attend"/>
+    </form>
+    <form action="/Assignment/lecture/viewtimetable?id=">
+        <input type="hidden" name="id" id="idValue" value="${param.id}">
+    <input class="b" type="submit" value="Views Attend"/>
+    </form>
+    <form action="/Assignment/logout">
+        <input class="b" type="submit" value="Log Out"/>
+    </form>
+    </body>
 </html>

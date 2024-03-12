@@ -12,7 +12,7 @@ package entity;
 public class Student {
     private String id;
     private String name;
-    private boolean attent;
+    private String attent;
     private String des;
 
     public Student(String id, String name) {
@@ -20,7 +20,7 @@ public class Student {
         this.name = name;
     }
 
-    public Student(String id, String name, boolean attent, String des) {
+    public Student(String id, String name, String attent, String des) {
         this.id = id;
         this.name = name;
         this.attent = attent;
@@ -46,11 +46,11 @@ public class Student {
         this.name = name;
     }
 
-    public boolean isAttent() {
+    public String getAttent() {
         return attent;
     }
 
-    public void setAttent(boolean attent) {
+    public void setAttent(String attent) {
         this.attent = attent;
     }
 

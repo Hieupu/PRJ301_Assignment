@@ -19,6 +19,7 @@ public class Session {
     private Subject subject;
     private Date date;
     private Student stu;
+    private boolean taken;
     
     public String getId() {
         return id;
@@ -82,6 +83,14 @@ public class Session {
 
     public void setStu(Student stu) {
         this.stu = stu;
+    }
+
+    public boolean isTaken() {
+        return taken;
+    }
+
+    public void setTaken(boolean taken) {
+        this.taken = taken;
     }
     
 }

@@ -21,7 +21,7 @@ public class DateTimeHelper {
     if (dayOfWeek == 0) {
         calendar.add(Calendar.DAY_OF_MONTH, -6);
     } else {
-        calendar.add(Calendar.DAY_OF_MONTH, -dayOfWeek);
+        calendar.add(Calendar.DAY_OF_MONTH, -dayOfWeek+1);
     }
     return calendar.getTime();
 }

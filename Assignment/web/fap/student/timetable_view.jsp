@@ -28,6 +28,18 @@
             a {
                 color: blue;
             }
+            h6.xanh {
+                margin: 2px;
+                color: green;
+            }
+            h6.do {
+                margin: 2px;
+                color : red;
+            }
+            h6.xam {
+                margin: 2px;
+                color: gray;
+            }
         </style>
     </head>
     <body>
@@ -35,7 +47,7 @@
             <thead>
                 <tr>
                     <th><form action="view" method="GET">
-                            <input type="text" name="id" value="${param.id}"/><br>
+                            <input type="hidden" name="id" value="${param.id}" readonly/><br>
                             From: <input type="date" name="from" value="${requestScope.from}" />
                             To: <input type="date" name="to" value="${requestScope.to}" />
                             <input type="submit" value="View" />
@@ -54,20 +66,20 @@
                                 <c:forEach var="sess" items="${sessions}">
                                     <c:if test="${sess.slot.value eq hour and sess.date eq date}">
                                         <a href="view?subject=${sess.subject.name}&value=${sess.slot.value}&day=${sess.slot.day}">
-                                            ${sess.subject.name}
+                                        ${sess.subject.name}
                                         </a>
                                         ${sess.slot.duration}<br>
                                         ${sess.lecture.name}<br>
                                         ${sess.group.name}<br>
                                         ${sess.room.code}<br> 
-                                        <c:if test="${sess.stu.attent eq 'true'}">
-                                            Present
+                                        <c:if test="${sess.stu.attent eq '1'}">
+                                            <h6 class="xanh">Present</h6>
                                         </c:if>
-                                        <c:if test="${sess.stu.attent eq 'false'}">
-                                            Absent
+                                        <c:if test="${sess.stu.attent eq '0'}">
+                                            <h6 class="do">Absent</h6>
                                         </c:if>
-                                        <c:if test="${not (sess.stu.attent eq 'true' or sess.stu.attent eq 'false')}">
-                                            Not yet
+                                        <c:if test="${not (sess.stu.attent eq '1' or sess.stu.attent eq '0')}">
+                                            <h6 class="xam">Not yet</h6>
                                         </c:if>
 
                                     </c:if>

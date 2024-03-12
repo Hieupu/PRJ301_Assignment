@@ -39,7 +39,7 @@ public class TakeAttendController extends BaseRequiredAuthenticationController {
             int slotDay = Integer.parseInt(dayParam);
 
             StudentDBContext stuDB = new StudentDBContext();
-            ArrayList<Student> students = stuDB.list(subjectName, slotValue, slotDay);
+            ArrayList<Student> students = stuDB.show(subjectName, slotValue, slotDay);
 
             request.setAttribute("students", students);
             request.setAttribute("subjectName", subjectName);

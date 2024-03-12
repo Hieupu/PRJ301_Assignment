@@ -26,7 +26,7 @@ public class SessionDBContext extends DBContext<Session> {
     public ArrayList<Session> leclist(String lid, Date from, Date to) throws SQLException {
         ArrayList<Session> ses = new ArrayList<>();
         PreparedStatement stm = null;
-        String sql = "SELECT se.date, su.name AS subject_name, sl.value, sl.duration, sl.day, l.name AS lecture_name, g.name AS group_name, r.code "
+        String sql = "SELECT se.date, su.name AS subject_name, sl.value, sl.duration, sl.day, l.name AS lecture_name, g.name AS group_name, r.code, se.istaken "
                 + "FROM [Group] g "
                 + "JOIN [Session] se ON se.gid = g.id "
                 + "JOIN Slot sl ON sl.id = se.slid "
@@ -66,6 +66,7 @@ public class SessionDBContext extends DBContext<Session> {
                 session.setRoom(r);
                 java.sql.Date datefromDB = rs.getDate("date");
                 session.setDate(datefromDB);
+                session.setTaken(rs.getBoolean("istaken"));
                 ses.add(session);
             }
         } finally {
@@ -116,7 +117,7 @@ public class SessionDBContext extends DBContext<Session> {
 
                 Student s = new Student();
                 s.setName(rs.getString("name"));
-                s.setAttent(rs.getBoolean("isattend"));
+                s.setAttent(rs.getString("isattend"));
                 Session session = new Session();
                 session.setSlot(sl);
                 session.setSubject(su);

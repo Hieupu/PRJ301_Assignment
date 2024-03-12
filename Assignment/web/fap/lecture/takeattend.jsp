@@ -51,12 +51,21 @@
                             <td>${student.id}</td>
                             <td>${student.name}</td>
                             <td>
-                                <input type="radio" name="attendance_${student.id}" value="1"> Present
-                                <input type="radio" name="attendance_${student.id}" value="0"> Absent
+                                <c:choose>
+                                    <c:when test="${student.attent eq '1'}">
+                                        <input type="radio" name="attendance_${student.id}" value="0" > Absent
+                                        <input type="radio" name="attendance_${student.id}" value="1" checked> Present
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input type="radio" name="attendance_${student.id}" value="0" checked> Absent
+                                        <input type="radio" name="attendance_${student.id}" value="1"> Present
+                                    </c:otherwise>
+                                </c:choose>
                             </td>
                             <td>
-                                <input type="text" name="des_${student.id}" >
+                                <input type="text" name="des_${student.id}" value="${student.des}">
                                 <input type="hidden" name="studentID" value="${student.id}">
+                                <input type="hidden" name="taken" value="1">
                             </td>
                         </tr>
                     </c:forEach>

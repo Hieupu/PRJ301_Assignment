@@ -28,13 +28,12 @@ public class AttendanceController extends BaseRequiredAuthenticationController {
                 String studentID = paramName.substring("attendance_".length());
                 String attendance = req.getParameter(paramName);
                 String note = req.getParameter("des_" + studentID);
-                int attendanceValue = "1".equals(attendance) ? 1 : 0;
-
-                attendDBContext.insertAttend(subjectName, slotValue, slotDay, studentID, note, attendanceValue == 1 ? Boolean.TRUE : Boolean.FALSE);
+                String istaken = req.getParameter("taken");
+                attendDBContext.insertAttend(subjectName, slotValue, slotDay, studentID, note, attendance, istaken);
             }
         }
 
-        resp.sendRedirect("../fap/lecture/success.jsp");
+        resp.sendRedirect("../fap/lecture/success.jsp?id=" +account.getId());
     }
 
     @Override

@@ -78,7 +78,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>TakeAttend</servlet-name>
-        <url-pattern>/attend</url-pattern>
+        <url-pattern>/lecture/attend</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>fap/login.jsp</welcome-file>

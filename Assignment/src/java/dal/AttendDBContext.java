@@ -15,50 +15,50 @@ import java.util.logging.Logger;
  */
 public class AttendDBContext extends DBContext<Attendance> {
 
-    public void insertAttend(String subjectName, int slotValue, int slotDay, String studentID, String des, Boolean isattend) {
-        int attend;
-        if(isattend){
-            attend = 1;
-        }else{
-            attend = 0;
+    public void insertAttend(String subjectName, int slotValue, int slotDay, String studentID, String des, String isattend, String istaken) {
+        try {
+            PreparedStatement stm;
+            String sql = """
+                         SELECT se.id FROM Session se 
+                         JOIN [Group] g ON se.gid = g.id
+                         JOIN Slot sl ON sl.id = se.slid
+                         JOIN Subject su ON su.id = g.suid
+                         WHERE su.name = ? AND sl.value = ? AND sl.day =?""";
+            stm = connection.prepareStatement(sql);
+            stm.setString(1, subjectName);
+            stm.setInt(2, slotValue);
+            stm.setInt(3, slotDay);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                String seId = rs.getString("id");
+
+                PreparedStatement stm_2;
+                String sql_2 = """
+                               UPDATE [dbo].[Attendance]
+                                  SET [des] = ?
+                                     ,[isattend] = ?
+                                WHERE [seid] = ?
+                                     AND [sid] = ?""";
+                stm_2 = connection.prepareStatement(sql_2);
+                stm_2.setString(3, seId);
+                stm_2.setString(4, studentID);
+                stm_2.setString(1, des);
+                stm_2.setString(2, isattend);
+                stm_2.executeUpdate();
+                
+                PreparedStatement stm_3;
+                String sql_3 = """
+                               UPDATE [dbo].[Session]
+                                  SET [istaken] = ?
+                                WHERE [id] = ?""";
+                stm_3 = connection.prepareStatement(sql_3);
+                stm_3.setString(2, seId);
+                stm_3.setString(1, istaken);
+                stm_3.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AttendDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
-    try {
-        PreparedStatement stm = null;
-        String sql = "SELECT se.id FROM Session se \n"
-                + "JOIN [Group] g ON se.gid = g.id\n"
-                + "JOIN Slot sl ON sl.id = se.slid\n"
-                + "JOIN Subject su ON su.id = g.suid\n"
-                + "WHERE su.name = ? AND sl.value = ? AND sl.day =?";
-        stm = connection.prepareStatement(sql);
-        stm.setString(1, subjectName);
-        stm.setInt(2, slotValue);
-        stm.setInt(3, slotDay);
-        ResultSet rs = stm.executeQuery();
-        if (rs.next()) {
-            String seId = rs.getString("id");
-            
-            // Thực hiện INSERT Attendance với giá trị se.id đã lấy được
-            PreparedStatement stm_2 = null;
-            String sql_2 = "INSERT INTO [dbo].[Attendance]\n"
-                    + "           ([seid]\n"
-                    + "           ,[sid]\n"
-                    + "           ,[des]\n"
-                    + "           ,[isattend])\n"
-                    + "     VALUES\n"
-                    + "           (?\n"
-                    + "           ,?\n"
-                    + "           ,?\n"
-                    + "           ,?)";      
-            stm_2 = connection.prepareStatement(sql_2);
-            stm_2.setString(1, seId);
-            stm_2.setString(2, studentID); 
-            stm_2.setString(3, des); 
-            stm_2.setInt(4, attend); 
-            stm_2.executeUpdate();
-        }
-    } catch (SQLException ex) {
-        Logger.getLogger(AttendDBContext.class.getName()).log(Level.SEVERE, null, ex);
     }
-}
 
 }

@@ -49,7 +49,7 @@
                             <td>${student.name}</td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${student.attent}">
+                                    <c:when test="${student.attent eq '1'}">
                                         Present
                                     </c:when>
                                     <c:otherwise>
@@ -57,7 +57,7 @@
                                     </c:otherwise>
                                 </c:choose>
                             </td>
-                            <td></td>
+                            <td>${student.des}</td>
                         </tr>
                     </c:forEach>
                 </tbody>
