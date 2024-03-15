@@ -3,13 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package entity;
+
 import java.sql.Date;
-import java.util.ArrayList;
+
 /**
  *
  * @author Admin
  */
 public class Attendance {
+
     private int id;
     private String des;
     private Date date;
@@ -55,5 +57,5 @@ public class Attendance {
     public void setSes(Session ses) {
         this.ses = ses;
     }
-    
+
 }

@@ -15,17 +15,16 @@ import java.util.Date;
 public class DateTimeHelper {
 
     public static Date getWeekStart(Date date) {
-    Calendar calendar = Calendar.getInstance();
-    calendar.setTime(date);
-    int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - calendar.getFirstDayOfWeek();
-    if (dayOfWeek == 0) {
-        calendar.add(Calendar.DAY_OF_MONTH, -6);
-    } else {
-        calendar.add(Calendar.DAY_OF_MONTH, -dayOfWeek+1);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - calendar.getFirstDayOfWeek();
+        if (dayOfWeek == 0) {
+            calendar.add(Calendar.DAY_OF_MONTH, -6);
+        } else {
+            calendar.add(Calendar.DAY_OF_MONTH, -dayOfWeek + 1);
+        }
+        return calendar.getTime();
     }
-    return calendar.getTime();
-}
-
 
     public static java.sql.Date convertUtilDateToSqlDate(java.util.Date utilDate) {
         if (utilDate != null) {
@@ -55,17 +54,16 @@ public class DateTimeHelper {
         if (fromDate.after(toDate)) {
             throw new IllegalArgumentException("fromDate cannot be after toDate.");
         }
-        
+
         Date from = new Date(fromDate.getTime());
         Date to = new Date(toDate.getTime());
-        
+
         Date temp = from;
 
         ArrayList<java.sql.Date> dates = new ArrayList<>();
-        while(!temp.after(to))
-        {
+        while (!temp.after(to)) {
             dates.add(convertUtilDateToSqlDate(temp));
-            temp=addDaysToDate(temp, 1);
+            temp = addDaysToDate(temp, 1);
         }
         return dates;
     }

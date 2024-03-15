@@ -4,16 +4,18 @@
  */
 package entity;
 
-
 /**
  *
  * @author Admin
  */
 public class Student {
+
     private String id;
     private String name;
     private String attent;
     private String des;
+    private Group group;
+    private int isgrade;
 
     public Student(String id, String name) {
         this.id = id;
@@ -60,6 +62,22 @@ public class Student {
 
     public void setDes(String des) {
         this.des = des;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public int getIsgrade() {
+        return isgrade;
+    }
+
+    public void setIsgrade(int isgrade) {
+        this.isgrade = isgrade;
     }
     
 }

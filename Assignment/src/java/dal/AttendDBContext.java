@@ -45,7 +45,7 @@ public class AttendDBContext extends DBContext<Attendance> {
                 stm_2.setString(1, des);
                 stm_2.setString(2, isattend);
                 stm_2.executeUpdate();
-                
+
                 PreparedStatement stm_3;
                 String sql_3 = """
                                UPDATE [dbo].[Session]

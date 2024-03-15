@@ -16,9 +16,10 @@ import java.util.logging.Logger;
  * @param <T>
  */
 public abstract class DBContext<T> {
+
     protected Connection connection;
-    public DBContext()
-    {
+
+    public DBContext() {
         try {
             String url = "jdbc:sqlserver://localhost:1433;databaseName=fap;encrypt=true;trustServerCertificate=true;";
             String user = "hieu";

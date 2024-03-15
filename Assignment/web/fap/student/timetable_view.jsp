@@ -65,8 +65,8 @@
                             <td>
                                 <c:forEach var="sess" items="${sessions}">
                                     <c:if test="${sess.slot.value eq hour and sess.date eq date}">
-                                        <a href="view?subject=${sess.subject.name}&value=${sess.slot.value}&day=${sess.slot.day}">
-                                        ${sess.subject.name}
+                                        <a href="">
+                                            ${sess.subject.name}
                                         </a>
                                         ${sess.slot.duration}<br>
                                         ${sess.lecture.name}<br>

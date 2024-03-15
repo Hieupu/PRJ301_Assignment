@@ -9,6 +9,7 @@ package entity;
  * @author Admin
  */
 public class Subject {
+
     private int id;
     private String name;
 
@@ -27,5 +28,5 @@ public class Subject {
     public void setName(String name) {
         this.name = name;
     }
-    
+
 }

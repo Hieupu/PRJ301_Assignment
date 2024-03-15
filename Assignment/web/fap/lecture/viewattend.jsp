@@ -33,34 +33,34 @@
     <body>
         <%String subjectName = (String)request.getAttribute("subjectName");%>
         <h2>${subjectName}</h2>
-            <table>
-                <thead>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên Sinh viên</th>
+                    <th>Điểm danh</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="student" items="${students}">
                     <tr>
-                        <th>ID</th>
-                        <th>Tên Sinh viên</th>
-                        <th>Điểm danh</th>
-                        <th>Note</th>
+                        <td>${student.id}</td>
+                        <td>${student.name}</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${student.attent eq '1'}">
+                                    Present
+                                </c:when>
+                                <c:otherwise>
+                                    Absent
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+                        <td>${student.des}</td>
                     </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="student" items="${students}">
-                        <tr>
-                            <td>${student.id}</td>
-                            <td>${student.name}</td>
-                            <td>
-                                <c:choose>
-                                    <c:when test="${student.attent eq '1'}">
-                                        Present
-                                    </c:when>
-                                    <c:otherwise>
-                                        Absent
-                                    </c:otherwise>
-                                </c:choose>
-                            </td>
-                            <td>${student.des}</td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
+                </c:forEach>
+            </tbody>
+        </table>
     </body>
 </html>

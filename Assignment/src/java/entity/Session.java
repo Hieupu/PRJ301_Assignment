@@ -11,6 +11,7 @@ import java.sql.Date;
  * @author Admin
  */
 public class Session {
+
     private String id;
     private Lecture lecture;
     private Slot slot;
@@ -20,7 +21,7 @@ public class Session {
     private Date date;
     private Student stu;
     private boolean taken;
-    
+
     public String getId() {
         return id;
     }
@@ -92,5 +93,5 @@ public class Session {
     public void setTaken(boolean taken) {
         this.taken = taken;
     }
-    
+
 }

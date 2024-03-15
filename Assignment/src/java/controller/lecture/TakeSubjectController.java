@@ -4,16 +4,17 @@
  */
 package controller.lecture;
 
-import dal.SessionDBContext;
-import entity.Session;
+import controller.auth.BaseRequiredAuthenticationController;
+import dal.GradeDBContext;
+import entity.Account;
+import entity.Group;
+import entity.Subject;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import controller.auth.BaseRequiredAuthenticationController;
-import entity.Account;
-import java.sql.SQLException;
 import java.util.Date;
 import util.DateTimeHelper;
 
@@ -21,7 +22,7 @@ import util.DateTimeHelper;
  *
  * @author Admin
  */
-public class TimetableViewController extends BaseRequiredAuthenticationController {
+public class TakeSubjectController extends BaseRequiredAuthenticationController {
 
     /**
      * Returns a short description of the servlet.
@@ -35,17 +36,19 @@ public class TimetableViewController extends BaseRequiredAuthenticationControlle
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
+
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
         try {
+
             String lid = req.getParameter("id");
             String raw_from = req.getParameter("from");
             String raw_to = req.getParameter("to");
             Date today = new Date();
-            java.sql.Date from;
-            java.sql.Date to;
+            java.sql.Date from = null;
+            java.sql.Date to = null;
 
             if (raw_from == null) {
                 from = DateTimeHelper.convertUtilDateToSqlDate(DateTimeHelper.getWeekStart(today));
@@ -62,16 +65,20 @@ public class TimetableViewController extends BaseRequiredAuthenticationControlle
 
             ArrayList<java.sql.Date> dates = DateTimeHelper.getDatesBetween(from, to);
 
-            SessionDBContext se = new SessionDBContext();
-            ArrayList<Session> sessions = se.leclist(lid, from, to);
+            GradeDBContext db = new GradeDBContext();
+            ArrayList<Subject> subs = db.listSublect(lid, from, to);
 
             req.setAttribute("from", from);
             req.setAttribute("to", to);
             req.setAttribute("dates", dates);
-            req.setAttribute("sessions", sessions);
-            req.getRequestDispatcher("../fap/lecture/timetable_view.jsp").forward(req, resp);
-
-        } catch (ServletException | IOException | SQLException e) {
+            req.setAttribute("subs", subs);
+            req.getRequestDispatcher("../fap/lecture/grade.jsp").forward(req, resp);
+        } catch (NumberFormatException ex) {
+            resp.setContentType("text/html");
+            PrintWriter out = resp.getWriter();
+            out.println("<h2>Xảy ra lỗi khi xử lý yêu cầu:</h2>");
+            out.println("<p>" + ex.getMessage() + "</p>");
+            ex.printStackTrace(out);
         }
     }
 

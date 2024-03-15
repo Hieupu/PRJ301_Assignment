@@ -9,6 +9,7 @@ package entity;
  * @author Admin
  */
 public class Slot {
+
     private int id;
     private int value;
     private int day;
@@ -21,7 +22,7 @@ public class Slot {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public int getValue() {
         return value;
     }
@@ -45,5 +46,5 @@ public class Slot {
     public void setDuration(String duration) {
         this.duration = duration;
     }
-    
+
 }

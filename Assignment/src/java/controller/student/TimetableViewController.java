@@ -21,7 +21,7 @@ import util.DateTimeHelper;
  *
  * @author Admin
  */
-public class TimetableViewController extends BaseRequiredAuthenticationController{
+public class TimetableViewController extends BaseRequiredAuthenticationController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -80,7 +80,7 @@ public class TimetableViewController extends BaseRequiredAuthenticationControlle
             req.setAttribute("sessions", sessions);
             req.getRequestDispatcher("../fap/student/timetable_view.jsp").forward(req, resp);
 
-        } catch(ServletException | IOException | SQLException e){
+        } catch (ServletException | IOException | SQLException e) {
         }
     }
 

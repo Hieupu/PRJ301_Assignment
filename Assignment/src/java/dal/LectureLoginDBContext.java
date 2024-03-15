@@ -7,17 +7,19 @@ package dal;
 import entity.Lecture;
 import entity.LectureAccount;
 import java.sql.*;
+
 /**
  *
  * @author Admin
  */
-public class LectureLoginDBContext extends DBContext<Lecture>{
+public class LectureLoginDBContext extends DBContext<Lecture> {
+
     PreparedStatement stm = null;
     ResultSet rs = null;
     LectureAccount acc = new LectureAccount();
 
     public LectureAccount checkLogin(String user, String password) throws Exception {
-        String sql1 = "SELECT [user], pass, lid FROM LectureAccount WHERE [user] = ? AND [pass] = ?";
+         String sql1 = "SELECT [user], pass, lid FROM LectureAccount WHERE [user] = ? AND [pass] = ?";
         stm = connection.prepareStatement(sql1);
         stm.setString(1, user);
         stm.setString(2, password);

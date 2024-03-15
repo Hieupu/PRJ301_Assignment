@@ -6,7 +6,6 @@ import entity.Account;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
@@ -33,11 +32,11 @@ public class AttendanceController extends BaseRequiredAuthenticationController {
             }
         }
 
-        resp.sendRedirect("../fap/lecture/success.jsp?id=" +account.getId());
+        resp.sendRedirect("../fap/lecture/success.jsp?id=" + account.getId());
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

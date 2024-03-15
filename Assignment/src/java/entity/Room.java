@@ -9,6 +9,7 @@ package entity;
  * @author Admin
  */
 public class Room {
+
     private int id;
     private String code;
 
@@ -27,6 +28,5 @@ public class Room {
     public void setCode(String code) {
         this.code = code;
     }
-
 
 }

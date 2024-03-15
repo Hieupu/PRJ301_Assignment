@@ -38,7 +38,6 @@ public class StudentDBContext extends DBContext<Student> {
 //        }
 //        return students;
 //  }
-
     public ArrayList<Student> show(String subjectName, int slotValue, int slotDay) throws SQLException {
         ArrayList<Student> students = new ArrayList<>();
         PreparedStatement stm;

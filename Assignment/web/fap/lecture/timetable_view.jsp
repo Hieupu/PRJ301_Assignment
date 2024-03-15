@@ -25,7 +25,7 @@
             th {
                 background-color: lightblue;
             }
-            a { 
+            a {
                 color: blue;
             }
         </style>

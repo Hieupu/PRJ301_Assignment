@@ -40,6 +40,30 @@
         <servlet-name>TakeAttend</servlet-name>
         <servlet-class>controller.lecture.AttendanceController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GradeController</servlet-name>
+        <servlet-class>controller.student.GradeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TakeGroupController</servlet-name>
+        <servlet-class>controller.lecture.TakeGroupController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TakeStudentController</servlet-name>
+        <servlet-class>controller.lecture.TakeStudentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TakeGradeListController</servlet-name>
+        <servlet-class>controller.lecture.TakeGradeListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TakeSubjectController</servlet-name>
+        <servlet-class>controller.lecture.TakeSubjectController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LectureGradeController</servlet-name>
+        <servlet-class>controller.lecture.GradeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BaseRequiredAuthenticationController</servlet-name>
         <url-pattern>/BaseRequiredAuthenticationController</url-pattern>
@@ -79,6 +103,30 @@
     <servlet-mapping>
         <servlet-name>TakeAttend</servlet-name>
         <url-pattern>/lecture/attend</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GradeController</servlet-name>
+        <url-pattern>/student/grade</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TakeGroupController</servlet-name>
+        <url-pattern>/lecture/takegroup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TakeStudentController</servlet-name>
+        <url-pattern>/lecture/takestudent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TakeGradeListController</servlet-name>
+        <url-pattern>/lecture/gradelist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TakeSubjectController</servlet-name>
+        <url-pattern>/lecture/takesubject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LectureGradeController</servlet-name>
+        <url-pattern>/lecture/grade</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>fap/login.jsp</welcome-file>

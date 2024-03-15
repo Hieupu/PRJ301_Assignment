@@ -9,6 +9,7 @@ package entity;
  * @author Admin
  */
 public class Account {
+
     private String user;
     private String pass;
     private String id;
@@ -36,6 +37,5 @@ public class Account {
     public void setId(String id) {
         this.id = id;
     }
-    
-    
+
 }

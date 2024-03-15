@@ -8,6 +8,6 @@ package entity;
  *
  * @author Admin
  */
-public class LectureAccount extends Account{
-    
+public class LectureAccount extends Account {
+
 }
