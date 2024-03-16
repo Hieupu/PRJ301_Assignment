@@ -31,6 +31,7 @@
         </style>
     </head>
     <body>
+        <a href="/Assignment/fap/lecture/success.jsp?id=${param.id}">Home</a><br><br>
         <table>
             <thead>
                 <tr>
@@ -53,7 +54,7 @@
                             <td>
                                 <c:forEach var="sess" items="${sessions}">
                                     <c:if test="${sess.slot.value eq hour and sess.date eq date}">
-                                        <a href="view?subject=${sess.subject.name}&value=${sess.slot.value}&day=${sess.slot.day}">
+                                        <a href="view?subject=${sess.subject.name}&value=${sess.slot.value}&day=${sess.slot.day}&id=${param.id}">
                                             ${sess.subject.name}
                                         </a>
                                         (${sess.slot.duration})<br>

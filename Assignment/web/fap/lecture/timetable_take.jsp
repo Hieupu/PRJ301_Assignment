@@ -28,6 +28,7 @@
         </style>
     </head>
     <body>
+        <a href="/Assignment/fap/lecture/success.jsp?id=${param.id}">Home</a><br><br>
         <table>
             <thead>
                 <tr>
@@ -56,7 +57,7 @@
                                         <c:if test="${sess.taken eq 'false'}">
                                             <div class="edit">
                                                 <h4 style="margin: 2px;">
-                                                    <a href="take?subject=${sess.subject.name}&value=${sess.slot.value}&day=${sess.slot.day}" style="color: blue;">Take</a>
+                                                    <a href="take?subject=${sess.subject.name}&value=${sess.slot.value}&day=${sess.slot.day}&id=${param.id}" style="color: blue;">Take</a>
                                                 </h4>
 
                                             </div>
@@ -64,7 +65,7 @@
                                         <c:if test="${sess.taken eq 'true'}">
                                             <div class="edit" style="display: flex; justify-content: space-around;">
                                                 <h4 style="color: blue; margin: 2px"> Taken
-                                                    <a style="margin-left: 40px" href="take?subject=${sess.subject.name}&value=${sess.slot.value}&day=${sess.slot.day}"> Edit
+                                                    <a style="margin-left: 40px" href="take?subject=${sess.subject.name}&value=${sess.slot.value}&day=${sess.slot.day}&id=${param.id}"> Edit
                                                     </a></h4>
                                             </div>
                                         </c:if>

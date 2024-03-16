@@ -36,6 +36,10 @@
         <input type="hidden" name="id" id="idValue" value="${param.id}">
         <input class="b" type="submit" value="Views Attend"/>
     </form>
+        <form action="/Assignment/student/grade?id=">
+        <input type="hidden" name="id" id="idValue" value="${param.id}">
+        <input class="b" type="submit" value="Views Grade"/>
+    </form>
     <form action="/Assignment/logout">
         <input class="b" type="submit" value="Log Out"/>
 </html>

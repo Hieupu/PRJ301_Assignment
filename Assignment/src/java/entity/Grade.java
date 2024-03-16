@@ -14,7 +14,7 @@ public class Grade {
     private Student stu;
     private String item;
     private String category;
-    private float grade;
+    private String grade;
     private int weight;
     private float avg;
 
@@ -50,11 +50,11 @@ public class Grade {
         this.category = category;
     }
 
-    public float getGrade() {
+    public String getGrade() {
         return grade;
     }
 
-    public void setGrade(float grade) {
+    public void setGrade(String grade) {
         this.grade = grade;
     }
 

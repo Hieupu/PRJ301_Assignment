@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.lecture;
+package controller.lecture.viewgrade;
 
 import controller.auth.BaseRequiredAuthenticationController;
 import dal.GradeDBContext;
@@ -22,7 +22,7 @@ import util.DateTimeHelper;
  *
  * @author Admin
  */
-public class TakeStudentController extends BaseRequiredAuthenticationController {
+public class ViewStudentController extends BaseRequiredAuthenticationController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -88,7 +88,7 @@ public class TakeStudentController extends BaseRequiredAuthenticationController 
         req.setAttribute("group", group);
         req.setAttribute("subs", subs);
         req.setAttribute("student", student);
-        req.getRequestDispatcher("../fap/lecture/grade.jsp").forward(req, resp);
+        req.getRequestDispatcher("../fap/lecture/viewgrade.jsp").forward(req, resp);
     }
 
 }

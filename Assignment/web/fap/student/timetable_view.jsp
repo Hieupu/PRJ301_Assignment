@@ -43,6 +43,7 @@
         </style>
     </head>
     <body>
+        <a style="color: blue; text-decoration: underline" href="/Assignment/fap/student/success.jsp?id=${param.id}">Home</a><br><br>
         <table>
             <thead>
                 <tr>

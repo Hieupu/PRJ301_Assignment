@@ -31,7 +31,7 @@
         </style>
     </head>
     <body>
-        <%String subjectName = (String)request.getAttribute("subjectName");%>
+        <a style="color: blue" href="/Assignment/fap/lecture/success.jsp?id=${param.id}">Home</a>
         <h2>${subjectName}</h2>
         <table>
             <thead>

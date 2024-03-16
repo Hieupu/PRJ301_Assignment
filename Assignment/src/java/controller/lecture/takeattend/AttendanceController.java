@@ -1,4 +1,4 @@
-package controller.lecture;
+package controller.lecture.takeattend;
 
 import controller.auth.BaseRequiredAuthenticationController;
 import dal.AttendDBContext;

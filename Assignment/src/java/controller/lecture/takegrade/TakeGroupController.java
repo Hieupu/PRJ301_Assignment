@@ -1,15 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-package controller.lecture;
+package controller.lecture.takegrade;
 
 import controller.auth.BaseRequiredAuthenticationController;
 import dal.GradeDBContext;
 import entity.Account;
-import entity.Grade;
 import entity.Group;
-import entity.Student;
 import entity.Subject;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -19,11 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import util.DateTimeHelper;
 
-/**
- *
- * @author Admin
- */
-public class TakeGradeListController extends BaseRequiredAuthenticationController {
+public class TakeGroupController extends BaseRequiredAuthenticationController {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -34,10 +24,11 @@ public class TakeGradeListController extends BaseRequiredAuthenticationControlle
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
+
     }
 
     @Override
@@ -63,24 +54,16 @@ public class TakeGradeListController extends BaseRequiredAuthenticationControlle
 
         ArrayList<java.sql.Date> dates = DateTimeHelper.getDatesBetween(from, to);
 
-        String groupname = req.getParameter("groupname");
         String subname = req.getParameter("subname");
         String lid = req.getParameter("id");
-        String sid = req.getParameter("sid");
         GradeDBContext db = new GradeDBContext();
-        ArrayList<Student> student = db.listStudent(subname, groupname);
         ArrayList<Group> group = db.listGroup(lid, subname);
         ArrayList<Subject> subs = db.listSublect(lid, from, to);
-        ArrayList<Grade> grade = db.listGrade(subname, sid, groupname);
-        req.setAttribute("sid", sid);
         req.setAttribute("from", from);
         req.setAttribute("to", to);
         req.setAttribute("dates", dates);
         req.setAttribute("group", group);
         req.setAttribute("subs", subs);
-        req.setAttribute("student", student);
-        req.setAttribute("grade", grade);
         req.getRequestDispatcher("../fap/lecture/grade.jsp").forward(req, resp);
     }
-
 }

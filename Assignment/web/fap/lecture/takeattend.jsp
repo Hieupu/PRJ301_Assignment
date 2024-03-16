@@ -31,6 +31,7 @@
         </style>
     </head>
     <body>
+        <a style="color: blue" href="/Assignment/fap/lecture/success.jsp?id=${param.id}">Home</a>
         <h2>${subjectName}</h2>
         <form action="attend" method="post">
             <input type="hidden" name="subject" value="${subjectName}">

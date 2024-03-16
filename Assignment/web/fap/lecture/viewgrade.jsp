@@ -34,9 +34,12 @@
     <body>
         <a style="color: blue; text-decoration: underline" href="/Assignment/fap/lecture/success.jsp?id=${param.id}">Home</a><br><br>
         <div style="margin-left: 40%;">
-            Lecture: <input type="text" name="id" value="${param.id}" readonly/><br>
-            From: <input type="date" name="from" value="${requestScope.from}" />
-            To: <input type="date" name="to" value="${requestScope.to}" />
+            <form action="/lecture/viewsubject?id=" method="GET">
+                Lecture: <input type="text" name="id" value="${param.id}" readonly=""/><br>
+                From: <input type="date" name="from" value="${requestScope.from}" />
+                To: <input type="date" name="to" value="${requestScope.to}" />
+                <input type="submit" value="View" />
+            </form>
         </div><br>
         <div class="c2">
             <table class="c1">
@@ -50,7 +53,7 @@
                         <c:forEach var="sub" items="${subs}">
                             <td style="display: flex; align-items: start;justify-content: center;">
                                 <h4 style="color: black;">
-                                    <a href="/Assignment/lecture/takegroup?id=${param.id}&subname=${sub.name}">${sub.name}</a>
+                                    <a href="/Assignment/lecture/viewgroup?id=${param.id}&subname=${sub.name}">${sub.name}</a>
                                 </h4>
                             </td>
                         </c:forEach>
@@ -68,7 +71,7 @@
                         <c:forEach var="g" items="${group}">
                             <td style="display: flex; align-items: start;justify-content: center;">
                                 <h4 style="color: black;">
-                                    <a href="/Assignment/lecture/takestudent?id=${param.id}&subname=${g.sub.name}&groupname=${g.name}">${g.name}</a>
+                                    <a href="/Assignment/lecture/viewstudent?id=${param.id}&subname=${g.sub.name}&groupname=${g.name}">${g.name}</a>
                                 </h4>
                             </td>
                         </c:forEach>
@@ -86,57 +89,36 @@
                 </thead>
                 <tbody>
                     <c:forEach var="s" items="${student}">
-                        <c:if test="${s.isgrade eq '0'}">
-                            <tr>
-                                <td>${s.id}</td>
-                                <td> </td>
-                                <td>${s.name}</td>
-                                <td>
-                                    <a href="/Assignment/lecture/gradelist?id=${param.id}&subname=${s.group.sub.name}&groupname=${s.group.name}&sid=${s.id}" style="border: 1px solid black; background-color: lightgray " onclick="toggleGrade(this)">Grade</a>
-                                </td>
-                            </tr>
-                        </c:if>
-                        <c:if test="${s.isgrade eq '1'}">
-                            <tr>
-                                <td style="background-color: lightgray;">${s.id}</td>
-                                <td> </td>
-                                <td style="background-color: lightgray;">${s.name}</td>
-                                <td style="background-color: lightgray;"> </td>
-                            </tr>
-                        </c:if>
+                        <tr>
+                            <td>${s.id}</td>
+                            <td> </td>
+                            <td>${s.name}</td>
+                            <td>
+                                <a href="/Assignment/lecture/viewgrade?id=${param.id}&subname=${s.group.sub.name}&groupname=${s.group.name}&sid=${s.id}" style="border: 1px solid black; background-color: lightgray " onclick="toggleGrade(this)">View</a>
+                            </td>
+                        </tr>
                     </c:forEach>
                 </tbody>
             </table>
-            <form action="/Assignment/lecture/grade" method="post">
-                <table style="width: 1000px">
-                    <thead>
+            <table style="width: 1000px">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Items</th>
+                        <th>Weight</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="gr" items="${grade}">
                         <tr>
-                            <th>Category</th>
-                            <th>Items</th>
-                            <th>Weight</th>
-                            <th>Grade</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="gr" items="${grade}">
-                            <tr>
-                                <td>${gr.category}</td>
-                                <td>${gr.item}</td>
-                                <td>${gr.weight}%</td>
-                                <td><input type="text" name="${gr.category}_${gr.item}_${gr.weight}" /></td>
-                        <input type="hidden" name="subname" value="${gr.stu.group.sub.name}" />
-                        <input type="hidden" name="groupname" value="${gr.stu.group.name}" />
-                        <input type="hidden" name="sid" value="${gr.stu.id}" />
-                        <input type="hidden" name="isgrade" value="1" />
-                        <input type="hidden" name="id" value="${param.id}" />
+                            <td>${gr.category}</td>
+                            <td>${gr.item}</td>
+                            <td>${gr.weight}%</td>
+                            <td>${gr.grade}</td>
                         </tr>
                     </c:forEach>
-                    </tbody>
-                </table>
-                <c:if test="${grade != null}">
-                    <input style="margin-left: 40% " type="submit" value="Submit">
-                </c:if>
-            </form>
+            </table>
         </div>
     </body>
 </html>
