@@ -97,7 +97,7 @@
                 <h3 style="color: red">NOT PASSED</h3>
             </c:if>
             <c:if test="${avg != null and avg < 5 and isgrade eq '0'}">
-                <h3 style="color: red">NOT YET</h3>
+                <h3 style="color: green">STYDYING</h3>
             </c:if>
         </div>
     </body>
