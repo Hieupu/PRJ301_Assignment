@@ -31,11 +31,11 @@
         </style>
     </head>
     <body>
-        <a href="/Assignment/fap/lecture/success.jsp?id=${param.id}">Home</a><br><br>
+        <a href="/Assignment/lecture/success.jsp?id=${param.id}">Home</a><br><br>
         <table>
             <thead>
                 <tr>
-                    <th><form action="lecture/viewtimetable" method="GET">
+                    <th><form action="viewtimetable" method="GET">
                             Lecture: <input type="text" name="id" value="${param.id}"/><br>
                             From: <input type="date" name="from" value="${requestScope.from}" />
                             To: <input type="date" name="to" value="${requestScope.to}" />

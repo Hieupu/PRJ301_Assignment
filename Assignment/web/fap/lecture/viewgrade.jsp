@@ -34,7 +34,7 @@
     <body>
         <a style="color: blue; text-decoration: underline" href="/Assignment/fap/lecture/success.jsp?id=${param.id}">Home</a><br><br>
         <div style="margin-left: 40%;">
-            <form action="/lecture/viewsubject?id=" method="GET">
+            <form action="/Assignment/lecture/viewsubject?id=" method="GET">
                 Lecture: <input type="text" name="id" value="${param.id}" readonly=""/><br>
                 From: <input type="date" name="from" value="${requestScope.from}" />
                 To: <input type="date" name="to" value="${requestScope.to}" />
@@ -100,7 +100,7 @@
                     </c:forEach>
                 </tbody>
             </table>
-            <table style="width: 1000px">
+            <table style="width: 900px">
                 <thead>
                     <tr>
                         <th>Category</th>

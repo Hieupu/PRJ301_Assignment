@@ -108,7 +108,7 @@
                 </tbody>
             </table>
             <form action="/Assignment/lecture/grade" method="post">
-                <table style="width: 1000px">
+                <table style="width: 900px">
                     <thead>
                         <tr>
                             <th>Category</th>
