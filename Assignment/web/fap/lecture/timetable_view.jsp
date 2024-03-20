@@ -31,7 +31,7 @@
         </style>
     </head>
     <body>
-        <a href="/Assignment/lecture/success.jsp?id=${param.id}">Home</a><br><br>
+        <a href="/Assignment/fap/lecture/success.jsp?id=${param.id}">Home</a><br><br>
         <table>
             <thead>
                 <tr>
